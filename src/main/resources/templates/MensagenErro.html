@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html
+  lang="pt-br"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+
+</head>
+
+<div th:if="${not #lists.isEmpty(mensagenserro)}">
+  <div
+    th:each="m : ${mensagenserro}" 
+    class="alert alert-danger alert-dismissible"
+    role="alert">
+    <button
+      type="button"
+      class="close"
+      data-dismiss="alert">x</button>
+    <span th:text="${m}">Titulo msg!</span>
+  </div>
+</div>
+
+
+
+</html>

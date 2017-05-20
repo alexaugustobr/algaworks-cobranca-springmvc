@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorator="LayoutPadrao">
+
+<head>
+
+<title>Cadastro de Titulo</title>
+</head>
+
+<body>
+
+
+  <section layout:fragment="conteudo">
+
+
+    <form th:object="${titulo}" class="form-horizontal" method="POST"
+      action="/titulos">
+
+      <div layout:include="MensagenGeral"></div>
+      <div layout:include="MensagenErroValidacao"></div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="clearfix">
+            <h1 class="panel-title aw-titulo-panel">Novo Titulo</h1>
+            <a class="btn btn-link aw-link-panel" href="/titulos">Voltar
+              para pesquisa</a>
+          </div>
+        </div>
+        <div class="panel-body">
+          <!-- recebe o variavel codigo do objeto titulo que esta vindo do controller -->
+          <input type="hidden" th:field="*{codigo}" />
+          <div class="form-group"
+            th:classappend="${#fields.hasErrors('descricao')} ? 'has-error'">
+            <label for="descricao" class="col-sm-2 control-label">Descrição</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" id="descricao"
+                name="descricao" th:field="*{descricao}" />
+            </div>
+          </div>
+          <!--           <div class="form-group" -->
+          <!--             th:classappend="${#fields.hasErrors('dataVencimento')} ? 'has-error'"> -->
+          <!--             <label for="dataVencimento" class="col-sm-2 control-label"> -->
+          <!--             Data de vencimento</label> -->
+          <!--             <div class="col-sm-2"> -->
+          <!--               <input type="text" -->
+          <!--                 class="js-data-limparSeNaoAtender text js-data form-control" -->
+          <!--                 id="dataVencimento" name="dataVencimento" -->
+          <!--                 th:field="*{dataVencimento}" /> -->
+          <!--             </div> -->
+          <!--           </div> -->
+
+          <div class="form-group"
+            th:classappend="${#fields.hasErrors('dataVencimento')} ? 'has-error'">
+            <label for="dataVencimento" class="col-sm-2 control-label">
+              Data de vencimento</label>
+            <div class="col-sm-2">
+              <input type="text" class="text form-control"
+                id="dataVencimento" name="dataVencimento"
+                th:field="*{dataVencimento}" 
+                data-provide="datepicker"
+                data-date-format="dd/mm/yyyy" 
+                data-date-language="pt-BR"
+                data-date-autoclose="true"
+                data-date-today-highlight="true" 
+                />
+            </div>
+          </div>
+          <div class="form-group"
+            th:classappend="${#fields.hasErrors('valor')} ? 'has-error'">
+            <label for="valor" class="col-sm-2 control-label">Valor</label>
+            <div class="col-sm-2">
+              <input type="text" class="js-dinheiro form-control"
+                id="valor" name="valor" th:field="*{valor}" />
+            </div>
+          </div>
+          <div class="form-group"
+            th:classappend="${#fields.hasErrors('status')} ? 'has-error'">
+            <label for="status" class="col-sm-2 control-label">Status</label>
+            <div class="col-sm-2">
+              <select class="form-control" name="status"
+                th:field="*{status}">
+                <option value="">Selecione</option>
+                <option th:each="status : ${statusTituloList}"
+                  th:value="${status}" th:text="${status.descricao}"></option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group"
+            th:classappend="${#fields.hasErrors('descricaoTipo')} ? 'has-error'">
+            <label for="descricaoTipo" class="col-sm-2 control-label">Tipo</label>
+            <div class="col-sm-2">
+              <select class="form-control" name="descricaoTipo"
+                th:field="*{descricaoTipo}">
+                <option value="">Selecione</option>
+                <option th:each="tituloTipo : ${tituloTipoList}"
+                  th:value="${tituloTipo.descricao}"
+                  th:text="${tituloTipo.descricao}"></option>
+
+              </select>
+
+             </div> 
+<!--             <div class="col-sm-1"> -->
+<!--               <a class="btn btn-link btn-xs" href="/titulos/tipo"> <span -->
+<!--                 class="glyphicon glyphicon-pencil"></span> -->
+<!--               </a> -->
+<!--             </div> -->
+
+
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" class="btn btn-primary">Salvar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </section>
+</body>
+</html>
