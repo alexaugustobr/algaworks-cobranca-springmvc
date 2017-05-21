@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -21,6 +22,7 @@ import com.algaworks.cobranca.model.TituloTipo;
 import com.algaworks.cobranca.model.Titulo;
 import com.algaworks.cobranca.repository.Titulos;
 import com.algaworks.cobranca.repository.TitulosTipo;
+import com.algaworks.cobranca.repository.filter.TituloFilter;
 import com.algaworks.cobranca.service.CadastroTituloService;
 
 @Controller
@@ -32,7 +34,7 @@ public class TituloController {
 	@Autowired
 	private CadastroTituloService cadastroTituloService;
 
-	@Autowired
+	@Autowired 
 	private TitulosTipo titulosTipo;
 	private static final String CADASTRO_VIEW = "CadastroTitulo";
 	private static final String REDIRECT_CADASTRO_VIEW = "redirect:/titulos/novo";
@@ -82,16 +84,26 @@ public class TituloController {
 		return StatusTitulo.RECEBIDO.getDescricao();//vai para o javascript  
 	}
 
-	@RequestMapping
-	public ModelAndView pesquisar() {
-		List<Titulo> todosTitulos = titulos.findAll();
-		// List<Titulo> todosTitulos = titulos.descricaoTipo("Salário");
-
+//	@RequestMapping
+//	public ModelAndView pesquisar(@RequestParam(defaultValue= "%") String descricao) {
+//		//List<Titulo> todosTitulos = titulos.findAll(); 
+//		// List<Titulo> todosTitulos = titulos.descricaoTipo("Salário");
+//		List<Titulo> todosTitulos = titulos.findByDescricaoContaining(descricao);
+//		ModelAndView mv = new ModelAndView("PesquisaTitulos");
+//		mv.addObject("titulos", todosTitulos);
+//		// mv.addObject("todosStatusTitulo",StatusTitulo.values());
+//		return mv;
+//	}
+	
+	@RequestMapping 
+	public ModelAndView pesquisar(@ModelAttribute("filtro")TituloFilter filtro) {
+		
+		List<Titulo> todosTitulos = cadastroTituloService.filtrar(filtro);
 		ModelAndView mv = new ModelAndView("PesquisaTitulos");
 		mv.addObject("titulos", todosTitulos);
 		// mv.addObject("todosStatusTitulo",StatusTitulo.values());
 		return mv;
-	}
+	} 
 
 	@RequestMapping("{codigo}")
 	// @PathVariable Long codigo

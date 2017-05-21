@@ -8,8 +8,10 @@ import com.algaworks.cobranca.model.Titulo;
 
 public interface Titulos extends JpaRepository<Titulo, Long> {
 
-	  List<Titulo> descricaoTipo(String descricaoTipo);
+	  //List<Titulo> descricaoTipo(String descricaoTipo);
+	  List<Titulo> findByDescricaoContaining(String descricao);
 
 	 // Titulos findByEmailAddress(String emailAddress);
 	
 }
+ 
