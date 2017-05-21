@@ -1,8 +1,7 @@
 //http://igorescobar.github.io/jQuery-Mask-Plugin/
 $(document).ready(function(){
 	  $('.js-data').mask('00/00/0000', {placeholder: "__/__/____"});
-	  $('.js-dinheiro').mask('000.000.000.000.000,00', {reverse: true});
-
+	  $('.js-dinheiro').mask('000.000.000.000.000,00', {reverse: true}, {placeholder: "0,00"});
 	  $('.js-data-limparSeNaoAtender').mask("00/00/0000", {clearIfNotMatch: true});
 	  $('.js-data-selecionaAoFocar').mask("00/00/0000", {selectOnFocus: true});
 	  

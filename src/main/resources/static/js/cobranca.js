@@ -32,4 +32,17 @@ $('#confirmacaoExclusaoModal')
 //CadastroTitulo
 $(function() {
 	$('[rel="tooltip"]').tooltip();
+	$('.js-currency').maskMoney({decimal: ',', thousands: '.', allowZero: true});
+	$('.js-atualizar-status').on('click', function(event){
+		event.preventDefault();//nao fazer a funcao do link de direcionar
+		var botaoReceber = $(event.currentTarget);
+		var urlReceber = botaoReceber.attr('href');
+		//console.log(urlReceber);
+		//ajax requisicao put na url
+		var response = $.ajax({
+			url: urlReceber, 
+			type: 'PUT'
+			
+		});
+	});
 });
