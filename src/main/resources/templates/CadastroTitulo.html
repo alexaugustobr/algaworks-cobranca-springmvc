@@ -21,7 +21,7 @@
       th:object="${titulo}"
       class="form-horizontal"
       method="POST"
-      action="/titulos">
+      th:action="@{/titulos}">
 
       <div layout:include="MensagenGeral"></div>
       <div layout:include="MensagenErroValidacao"></div>
@@ -32,7 +32,7 @@
             <h1 class="panel-title aw-titulo-panel">Novo Titulo</h1>
             <a
               class="btn btn-link aw-link-panel"
-              href="/titulos">Voltar para pesquisa</a>
+              th:href="@{/titulos}">Voltar para pesquisa</a>
           </div>
         </div>
         <div class="panel-body">

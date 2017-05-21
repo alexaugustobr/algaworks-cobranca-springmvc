@@ -23,12 +23,12 @@
         <h1 class="panel-title aw-titulo-panel">Pesquisa de títulos</h1>
         <a
           class="btn btn-link aw-link-panel"
-          href="/titulos/novo">Novo titulo</a>
+          th:href="@{/titulos/novo}">Novo titulo</a>
       </div>
     </div>
     <div class="panel-body">
       <form
-        action="/titulos"
+        th:action="@{/titulos}"
         th:object="${filtro}" 
         method="GET"
         class="from-horizontal">
