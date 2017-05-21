@@ -12,10 +12,12 @@
   data-keyboard="false"
   data-backdrop="static">
   <div class="modal-dialog">
+  <!-- atributo action="/titulos/" vai ser modificado via javascript -->
     <form
       action="/titulos/"
       th:attr="data-url-base='/titulos'"
       method="POST">
+      <!-- modifica metodo da form para deletar, -->
       <input
         type="hidden"
         name="_method"

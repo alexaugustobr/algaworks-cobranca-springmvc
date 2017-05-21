@@ -40,7 +40,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr th:each="titulo:${titulos}">
+          <tr th:id="'tr'+${titulo.codigo}" th:attr="data-trcodigo=${titulo.codigo}" th:each="titulo:${titulos}">
             <td
               class="text-center"
               th:text="${titulo.codigo}"></td>
@@ -52,7 +52,7 @@
             <td
               class="text-right"
               th:text="|R$ ${{titulo.valor}}|"></td>
-            <td class="text-center"><span
+            <td class="text-center" th:attr='data-role=${titulo.codigo}'><span
               class="label"
               th:text="${titulo.status.descricao}"
               th:classappend="${titulo.pendente ? 'label-danger' : 'label-success'}"></span>
@@ -79,6 +79,7 @@
               rel="tooltip"
               data-placement="top"
               class="btn btn-link btn-xs js-atualizar-status"
+              th:attr="data-codigo=${titulo.codigo}"
               th:href="@{/titulos/{codigo}/receber(codigo=${titulo.codigo})}"
               th:if="${titulo.pendente}"> <span
                 class="glyphicon glyphicon-check"></span>
